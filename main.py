@@ -1,9 +1,11 @@
 from requests import request, exceptions
 from json import loads
+from collections import defaultdict
 
+STAGE = 2
 HEADER = {
     "playerid": "410b8eaa-ddfa-494e-9baa-06aa30d05e6f",
-    "stage": "1",
+    "stage": str(STAGE),
     "Content-Type": "application/x-www-form-urlencoded"
 }
 
@@ -26,16 +28,16 @@ def MakeRequest(method: str, url: str, message: str, data: dict = None, headers=
         exit(1)
 
 
-distanceMatrix  = MakeRequest(
+distanceMatrix  = loads(MakeRequest(
     "GET",
     "http://192.168.131.50:8081/data",
     "Test",
     headers=HEADER
-)
+))
+
 visited = [0]
-distanceMatrix = loads(distanceMatrix)
 distanceMatrix = {i: {j: distanceMatrix[i][j] for j in range(len(distanceMatrix[i]))} for i in range(len(distanceMatrix))}
-while len(visited) < 10:
+while len(visited) < len(distanceMatrix):
     current = visited[-1]
     s = sorted(distanceMatrix[current].items(), key=lambda x: x[1])
     s.pop(0)
@@ -47,13 +49,13 @@ while len(visited) < 10:
             posted = True
         else: 
             i += 1
-visited += [0]
+solution = visited + [0]
 
 distanceMatrix  = MakeRequest(
     "POST",
     "http://192.168.131.50:8081/answer",
     "Basic Answer",
-    data={"route": str([0,1,2,3,4,5,6,7,8,9,10,0])},
+    data={"route": str(solution)},
     headers=HEADER
 )
 
