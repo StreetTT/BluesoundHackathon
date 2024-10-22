@@ -1,6 +1,7 @@
 # Parcel Delivery Route Optimization - Coding Challenge
 
 Welcome to my solution for the **Parcel Delivery Route Optimization** coding challenge, which was part of a Hackathon hosted by [Ultamation Limited](https://ultamation.com). 
+In this [LinkedIn post](https://www.linkedin.com/posts/bowoye_hackathon-codingchallenges-softwaredevelopment-activity-7254455440367874049-Pc_E?utm_source=share&utm_medium=member_desktop), I share my experience of tackling this challenge.
 
 ## Challenge Overview
 
